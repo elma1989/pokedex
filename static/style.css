@@ -7,3 +7,35 @@
     text-align: none;
     list-style: none;
 }
+
+html {
+    font-size: 10px;
+}
+
+body {
+    background: #c04000;
+}
+
+header, main ,footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .content {
+        display: flex;
+        width: 100%;
+        max-width: 1920px;
+        padding: 0 clamp(16px, 1.5dvw, 160px);
+    }
+}
+
+header,footer {
+    height: 10dvh;
+}
+
+main {
+    height: auto;
+    min-height: 80dvh;
+    .content {
+        padding: 16px clamp(16px, 1.5dvw, 160px);
+    }
+}
