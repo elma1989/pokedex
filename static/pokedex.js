@@ -13,6 +13,7 @@ export class Pokedex {
      * loads next 20 Pokemons.
      */
     async load20Pkmn() {
+        this.toggleLoadScreen();
         this.currentLoads++;
         for (let i = this.currentLoads; i < (this.currentLoads + 20); i++) {
             try {
@@ -28,6 +29,11 @@ export class Pokedex {
             }
         }
         this.currentLoads += 19;
+        this.toggleLoadScreen();
+    }
+
+    toggleLoadScreen() {
+        document.querySelector('.load-screen').classList.toggle('d-none');
     }
 
     // #region Render
