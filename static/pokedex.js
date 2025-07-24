@@ -32,6 +32,7 @@ export class Pokedex {
         this.toggleLoadScreen();
     }
 
+    /** Turns Load-Screen on and off. */
     toggleLoadScreen() {
         document.querySelector('.load-screen').classList.toggle('d-none');
     }

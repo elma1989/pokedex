@@ -1,5 +1,15 @@
 @import url(pokemon.css);
 
+@font-face {
+    font-family: DynaPuff;
+    src: url(assets/fonts/DynaPuff-Bold.ttf);
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(assets/fonts/Raleway-Regular.ttf);
+}
+
 :root {
     --bg: #c04000;
 }
@@ -20,7 +30,7 @@ html {
 
 body {
     background: var(--bg);
-    font-size: 16px;
+    font: 16px Raleway;
 }
 
 header, main ,footer {
@@ -73,7 +83,7 @@ main {
 }
 
 h2 {
-    font-size: 2.4rem;
+    font: 2.4rem DynaPuff;
     color: white;
 }
 
@@ -84,6 +94,7 @@ button {
     border: 1px solid white;
     border-radius: 8px;
     cursor: pointer;
+    font: 16px Raleway;
 }
 
 .load-screen {
