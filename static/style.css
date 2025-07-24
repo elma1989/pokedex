@@ -24,7 +24,6 @@ header, main ,footer {
     justify-content: center;
     align-items: center;
     .content {
-        display: flex;
         width: 100%;
         max-width: 1920px;
         padding: 16px;
@@ -33,9 +32,12 @@ header, main ,footer {
 
 header,footer {
     height: 10dvh;
-    img {
-        height: 80%;
-        margin-top: 16px;
+    .content {
+        display: flex;
+        img {
+            height: 80%;
+            margin-top: 16px;
+        }
     }
 }
 
@@ -43,15 +45,28 @@ main {
     height: auto;
     min-height: 80dvh;
     .content {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 16px;
-        padding: 64px 16px;
+        padding: 16px 32px;
+        .pkmn-area {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 32px 0;
+        }
     }
 }
 
 h2 {
     font-size: 2.4rem;
     color: white;
+}
+
+button {
+    background: #0080ff;
+    color: white;
+    padding: 8px;
+    border: 1px solid white;
+    border-radius: 8px;
+    cursor: pointer;
 }

@@ -1,12 +1,19 @@
 import { Pokemon } from './pokemon.js';
 import { Template } from './templates.js'
 
+/**
+ * Represents the Pokedex.
+ */
 export class Pokedex {
     pokemons = [];
     currentLoads = 0;
+
     // #regin Mathods
+    /**
+     * loads next 20 Pokemons.
+     */
     async load20Pkmn() {
-        this.currentLoads++
+        this.currentLoads++;
         for (let i = this.currentLoads; i < (this.currentLoads + 20); i++) {
             try {
                 const response = await fetch (`https://pokeapi.co/api/v2/pokemon/${i}`);
@@ -24,8 +31,20 @@ export class Pokedex {
     }
 
     // #region Render
+    /**
+     * Creates a Pokemon-Card.
+     * @param {string} type - Type of Pokemon 
+     */
     createPkmnCard(type) {
-        document.querySelector('main .content').innerHTML += Template.pkmnCart(type);
+        document.querySelector('.pkmn-area').innerHTML += Template.pkmnCart(type);
+    }
+    // #endregion
+
+    // #region Event
+    clickLoadMore() {
+        document.querySelector('#load-more').addEventListener('click', () => {
+            this.load20Pkmn();
+        });
     }
 }
 
