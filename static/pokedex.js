@@ -7,6 +7,7 @@ import { Template } from './templates.js'
 export class Pokedex {
     pokemons = [];
     currentLoads = 0;
+    currentType = '';
 
     // #regin Mathods
     /**
@@ -23,6 +24,7 @@ export class Pokedex {
                     this.pokemons.push(new Pokemon(pokedata.name, pokedata.types.map(t => t.type.name), pokedata.sprites['front_default'], pokedata.id, pokedata.height, pokedata.weight));
                     this.createPkmnCard(this.pokemons[i-1].types[0]);
                     this.pokemons[i-1].renderCard(i-1);
+                    this.clickCard(i-1);
                 }
             } catch (err) {
                 console.error(err);
@@ -48,9 +50,37 @@ export class Pokedex {
     // #endregion
 
     // #region Event
+    /** Adds a Click-Event for Load-More-Button */
     clickLoadMore() {
         document.querySelector('#load-more').addEventListener('click', () => {
             this.load20Pkmn();
+        });
+    }
+
+    /**
+     * Manges click on Pokemon-Card.
+     * @param {number} index - Index of Pokemon-Card.
+     */
+    clickCard(index) {
+        document.querySelectorAll('.pkmn-card')[index].addEventListener('click', () => {
+            this.pokemons[index].renderBigCard();
+            this.currentType = this.pokemons[index].type;
+        });
+    }
+
+    /** Stops porpagation form big card. */
+    clickBigCard() {
+        document.querySelector('.big-card').addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    /**Manages a click out of big card. */
+    clickBigCardOverlay() {
+        const refOverlay = document.querySelector('.big-card-overlay');
+        refOverlay.addEventListener('click', () => {
+            document.querySelector('.big-card').classList.remove(this.currentType);
+            refOverlay.classList.add('d-none');
         });
     }
 }

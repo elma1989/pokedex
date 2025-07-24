@@ -47,4 +47,10 @@ export class Pokemon {
         });
     }
 
+    /**Renders a big card of that Poekemon */
+    renderBigCard() {
+        console.log('renderBigCard');
+        document.querySelector('.big-card-overlay').classList.remove('d-none');
+        document.querySelector('.big-card').classList.add(this.types[0]);
+    }
 }
