@@ -14,6 +14,7 @@ export class Pokedex {
                     const pokedata = await response.json();
                     this.pokemons.push(new Pokemon(pokedata.name, pokedata.types.map(t => t.type.name), pokedata.sprites['front_default'], pokedata.id, pokedata.height, pokedata.weight));
                     this.createPkmnCard(this.pokemons[i-1].types[0]);
+                    this.pokemons[i-1].renderCard(i-1);
                 }
             } catch (err) {
                 console.error(err);
