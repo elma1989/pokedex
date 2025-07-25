@@ -4,6 +4,7 @@ import { Template } from "./templates.js";
 export class Pokemon {
     cmHeight;
     kgWeight;
+    textAbilities = '';
 
     /**
      *  Creates a Pokemon.
@@ -19,7 +20,7 @@ export class Pokemon {
      * @param {number} spec - Basic value of special-attacks for that Pokemon (Attack-Value only)
      * @param {number} speed - Basic-Speed value of that Pokemon
      */
-    constructor (name, types, img, id, height, weight, hp, attack, defense, spec, speed) {
+    constructor (name, types, img, id, height, weight, hp, attack, defense, spec, speed, abilities) {
         this.name = name.charAt(0).toUpperCase() + name.slice(1);
         this.types = types;
         this.img = img;
@@ -31,7 +32,9 @@ export class Pokemon {
         this.defense = defense;
         this.spec = spec;
         this.speed = speed;
+        this.abilities = abilities;
         this.euroUnits();
+        this.stringAbilities();
     }
 
     // #region Methods
@@ -39,6 +42,15 @@ export class Pokemon {
     euroUnits() {
         this.cmHeight = new Intl.NumberFormat('de-DE', {style:'unit', unit:'centimeter'}).format(this.height);
         this.kgWeight = new Intl.NumberFormat('de-DE', {style:'unit', unit:'kilogram'}).format(this.weight);
+    }
+
+    stringAbilities() {
+        for (let i = 0; i < this.abilities.length; i++) {
+            this.textAbilities += this.abilities[i];
+            if (i < this.abilities.length - 1) {
+                this.textAbilities += ', '
+            }
+        }
     }
 
     // #region Render
@@ -76,6 +88,10 @@ export class Pokemon {
         const refDataBtns = document.querySelector('.data-btns');
         
         refDataBtns.innerHTML = '';
-        refDataBtns.innerHTML += Template.dataBtn(this.types[0], 'Stats');
+        refDataBtns.innerHTML += Template.dataBtn(this.types[0], 'About');
+    }
+
+    renderAbout() {
+        document.querySelector('.raw-data').innerHTML = Template.tableAbount(this);
     }
 }

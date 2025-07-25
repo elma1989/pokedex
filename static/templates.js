@@ -40,4 +40,23 @@ export class Template {
             <button class="data-btn ${type}">${name}</button>
         `
     }
+
+    static tableAbount(pokemon) {
+        return /*html*/`
+            <table>
+                <tr>
+                    <td class="key">Weight:</td>
+                    <td class="value ta-right">${pokemon.kgWeight}</td>
+                </tr>
+                <tr>
+                    <td class="key">Height:</td>
+                    <td class="value ta-right">${pokemon.cmHeight}</td>
+                </tr>
+                <tr>
+                    <td class="key">Abilities:</td>
+                    <td class="value">${pokemon.textAbilities}</td>
+                </tr>
+            </table>
+        `
+    }
 }

@@ -32,7 +32,8 @@ export class Pokedex {
                         pokedata.stats[1]['base_stat'],
                         pokedata.stats[2]['base_stat'],
                         pokedata.stats[3]['base_stat'],
-                        pokedata.stats[5]['base_stat']
+                        pokedata.stats[5]['base_stat'],
+                        pokedata.abilities.map(abi => abi.ability.name)
                     ));
                     this.createPkmnCard(this.pokemons[i-1].types[0], i-1);
                     this.pokemons[i-1].renderCard(i-1);
@@ -76,6 +77,7 @@ export class Pokedex {
         this.clickArrows();
         this.pokemons[this.currentPkmnIndex].renderBigCard();
         this.pokemons[this.currentPkmnIndex].renderDataBtns();
+        this.pokemons[this.currentPkmnIndex].renderAbout();
     }
 
     /**
