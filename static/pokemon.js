@@ -43,14 +43,21 @@ export class Pokemon {
         document.querySelectorAll('.pkmn-card img')[index].src = this.img;
         document.querySelectorAll('.pkmn-card .pkmn-no')[index].textContent = `# ${this.id}`;
         this.types.forEach(type => {
-            refTypes.innerHTML += Template.typeBtn(type)
+            refTypes.innerHTML += Template.typeBtn(type);
         });
     }
 
     /**Renders a big card of that Poekemon */
     renderBigCard() {
-        console.log('renderBigCard');
+        const refTypes = document.querySelector('.big-card .pkmn-types')
         document.querySelector('.big-card-overlay').classList.remove('d-none');
         document.querySelector('.big-card').classList.add(this.types[0]);
+        document.querySelector('.big-card h2').textContent = this.name;
+        document.querySelector('.big-card .pkmn-no').textContent = `# ${this.id}`;
+        document.querySelector('.big-card img').src = this.img;
+        refTypes.innerHTML = '';
+        this.types.forEach (type => {
+            refTypes.innerHTML += Template.typeBtn(type);
+        });
     }
 }

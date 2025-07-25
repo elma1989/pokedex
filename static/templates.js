@@ -2,10 +2,12 @@ export class Template {
     static pkmnCart(type) {
         return /*html*/`
             <div class="pkmn-card ${type}">
+                <div class="pkmn-content">
                 <h2></h2>
                 <div class="pkmn-types"></div>
+                <span class="pkmn-no"></span>    
+                </div>
                 <img>
-                <span class="pkmn-no"></span>
             </div>
         `
     }
