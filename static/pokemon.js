@@ -70,4 +70,12 @@ export class Pokemon {
             refTypes.innerHTML += Template.typeBtn(type);
         });
     }
+
+    /** Renders the Data-Selection-Buttons */
+    renderDataBtns() {
+        const refDataBtns = document.querySelector('.data-btns');
+        
+        refDataBtns.innerHTML = '';
+        refDataBtns.innerHTML += Template.dataBtn(this.types[0], 'Stats');
+    }
 }

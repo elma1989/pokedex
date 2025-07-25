@@ -17,4 +17,10 @@ export class Template {
             <div class="type-icon ${type}">${type}</div>
         `
     }
+
+    static dataBtn(type, name) {
+        return /*html*/`
+            <button class="data-btn ${type}">${name}</button>
+        `
+    }
 }

@@ -76,8 +76,9 @@ export class Pokedex {
         const refCards = document.querySelectorAll('.pkmn-card');
         refCards.forEach((card, index) => {
             card.addEventListener('click', () => {
-                this.pokemons[index].renderBigCard();
                 this.currentType = this.pokemons[index].types[0];
+                this.pokemons[index].renderBigCard();
+                this.pokemons[index].renderDataBtns();
             })
         })
     }

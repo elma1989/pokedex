@@ -21,72 +21,162 @@
     background: #A8A77A;
 }
 
+.data-btns .normal {
+    color: #A8A77A;
+    border: 3px solid #A8A77A;
+}
+
 .fire {
     background: #EE8130;
+}
+
+.data-btns .fire {
+    color: #EE8130;
+    border: 3px solid #EE8130;
 }
 
 .water {
     background: #6390F0;
 }
 
+.data-btns .water {
+    color: #6390F0;
+    border: 3px solid #6390F0;
+}
+
 .electric {
     background: #F7D02C;
+}
+
+.data-btns .electric {
+    color: #F7D02C;
+    border: 3px solid #F7D02C;
 }
 
 .grass {
     background: #7AC74C;
 }
 
+.data-btns .grass {
+    color: #7AC74C;
+    border: 3px solid #7AC74C;
+}
+
 .ice {
     background: #96D9D6;
+}
+
+.data-btns .ice {
+    color: #96D9D6;
+    border: 3px solid #96D9D6;
 }
 
 .fighting {
     background: #C22E28;
 }
 
+.data-btns .fighting {
+    color: #C22E28;
+    border: 3px solid #C22E28;
+}
+
 .poison {
     background: #A33EA1;
+}
+
+.data-btns .poison {
+    color: #A33EA1;
+    border: 3px solid #A33EA1;
 }
 
 .ground {
     background: #E2BF65;
 }
 
+.data-btns .ground {
+    color: #E2BF65;
+    border: 3px solid #E2BF65;
+}
+
 .flying {
     background: #A98FF3;
+}
+
+.data-btns .flying {
+    color: #A98FF3;
+    border: 3px solid #A98FF3;
 }
 
 .psychic {
     background: #F95587;
 }
 
+.data-btns .psychic {
+    color: #F95587;
+    border: 3px solid #F95587;
+}
+
 .bug {
     background: #A6B91A;
+}
+
+.data-btns .bug {
+    color: #A6B91A;
+    border: 3px solid #A6B91A;
 }
 
 .rock {
     background: #B6A136;
 }
 
+.data-btns .rock {
+    color: #B6A136;
+    border: 3px solid #B6A136;
+}
+
 .ghost {
     background: #735797;
+}
+
+.data-btns .ghost {
+    color: #735797;
+    border: 3px solid #735797;
 }
 
 .dragon {
     background: #6F35FC;
 }
 
+.data-bts .dragon {
+    color: #6F35FC;
+    border: 3px solid #6F35FC;
+}
+
 .dark {
     background: #705746;
+}
+
+.data-btns .dark {
+    color: #705746;
+    border: 3px solid #705746;
 }
 
 .steel {
     background: #B7B7CE;
 }
 
+.data-btns .steel {
+    color: #B7B7CE;
+    border: 3px solid #B7B7CE;
+}
+
 .fairy {
     background: #D685AD;
+}
+
+.data-btns .fairy {
+    color: #D685AD;
+    border: 3px solid #D685AD;
 }
 
 .big-card-overlay {
@@ -121,6 +211,12 @@
             left: 0;
             border-radius: 16px;
             padding: 116px 16px 16px 16px;
+            .data-btns {
+                display: flex;
+                .data-btn {
+                    background: transparent;
+                }
+            }
         }
         img {
             width: 200px;
