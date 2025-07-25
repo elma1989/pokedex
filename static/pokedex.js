@@ -21,8 +21,19 @@ export class Pokedex {
                 const response = await fetch (`https://pokeapi.co/api/v2/pokemon/${i}`);
                 if (response.ok) {
                     const pokedata = await response.json();
-                    this.pokemons.push(new Pokemon(pokedata.name, pokedata.types.map(t => t.type.name), pokedata.sprites['front_default'], pokedata.id, pokedata.height, pokedata.weight));
-                    this.createPkmnCard(this.pokemons[i-1].types[0]);
+                    this.pokemons.push(new Pokemon(
+                        pokedata.name,
+                        pokedata.types.map(t => t.type.name),
+                        pokedata.sprites['front_default'],
+                        pokedata.id, pokedata.height,
+                        pokedata.weight,
+                        pokedata.stats[0]['base_stat'],
+                        pokedata.stats[1]['base_stat'],
+                        pokedata.stats[2]['base_stat'],
+                        pokedata.stats[3]['base_stat'],
+                        pokedata.stats[5]['base_stat']
+                    ));
+                    this.createPkmnCard(this.pokemons[i-1].types[0], i-1);
                     this.pokemons[i-1].renderCard(i-1);
                 }
             } catch (err) {
@@ -42,10 +53,10 @@ export class Pokedex {
     // #region Render
     /**
      * Creates a Pokemon-Card.
-     * @param {string} type - Type of Pokemon 
+     * @param {string} type - Type of Pokemon
      */
-    createPkmnCard(type) {
-        document.querySelector('.pkmn-area').innerHTML += Template.pkmnCart(type);
+    createPkmnCard(type, index) {
+        document.querySelector('.pkmn-area').innerHTML += Template.pkmnCart(type, index);
     }
     // #endregion
 

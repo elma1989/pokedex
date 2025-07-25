@@ -13,14 +13,24 @@ export class Pokemon {
      * @param {number} id - Number of the Pokemone.
      * @param {number} height - Weight (10 kg) of the Pokemon.
      * @param {number} weight - Heigh (dm) of the Pokemon.
+     * @param {number} hp - Basic Health-Points of that Pokemon
+     * @param {number} attack - Basic Attack-Points of that Pokemon
+     * @param {number} defense - Basic Defense-Poins of that Pokemon
+     * @param {number} spec - Basic value of special-attacks for that Pokemon (Attack-Value only)
+     * @param {number} speed - Basic-Speed value of that Pokemon
      */
-    constructor (name, types, img, id, height, weight) {
+    constructor (name, types, img, id, height, weight, hp, attack, defense, spec, speed) {
         this.name = name.charAt(0).toUpperCase() + name.slice(1);
         this.types = types;
         this.img = img;
         this.id = id;
         this.height = height * 10;
         this.weight = weight / 10;
+        this.hp = hp;
+        this.attack = attack;
+        this.defense = defense;
+        this.spec = spec;
+        this.speed = speed;
         this.euroUnits();
     }
 

@@ -1,5 +1,5 @@
 export class Template {
-    static pkmnCart(type) {
+    static pkmnCart(type, index) {
         return /*html*/`
             <div class="pkmn-card ${type}">
                 <div class="pkmn-content">

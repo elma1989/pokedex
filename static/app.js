@@ -5,3 +5,7 @@ pokedex.load20Pkmn();
 pokedex.clickLoadMore();
 pokedex.clickBigCard();
 pokedex.clickBigCardOverlay();
+
+function createBigCard(index) {
+    pokedex.pokemons[index].renderBigCard();
+}
