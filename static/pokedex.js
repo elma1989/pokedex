@@ -24,14 +24,14 @@ export class Pokedex {
                     this.pokemons.push(new Pokemon(pokedata.name, pokedata.types.map(t => t.type.name), pokedata.sprites['front_default'], pokedata.id, pokedata.height, pokedata.weight));
                     this.createPkmnCard(this.pokemons[i-1].types[0]);
                     this.pokemons[i-1].renderCard(i-1);
-                    this.clickCard(i-1);
                 }
             } catch (err) {
                 console.error(err);
             }
         }
-        this.currentLoads += 19;
         this.toggleLoadScreen();
+        this.currentLoads += 19;
+        this.clickCards();
     }
 
     /** Turns Load-Screen on and off. */
@@ -61,11 +61,14 @@ export class Pokedex {
      * Manges click on Pokemon-Card.
      * @param {number} index - Index of Pokemon-Card.
      */
-    clickCard(index) {
-        document.querySelectorAll('.pkmn-card')[index].addEventListener('click', () => {
-            this.pokemons[index].renderBigCard();
-            this.currentType = this.pokemons[index].type;
-        });
+    clickCards() {
+        const refCards = document.querySelectorAll('.pkmn-card');
+        refCards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                this.pokemons[index].renderBigCard();
+                this.currentType = this.pokemons[index].types[0];
+            })
+        })
     }
 
     /** Stops porpagation form big card. */
