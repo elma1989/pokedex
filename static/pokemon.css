@@ -218,12 +218,27 @@
                 }
             }
         }
-        img {
+        .pkmn-img {
             width: 200px;
             height: 200px;
             position: absolute;
             top: calc(33% - 100px);
             left: 50px;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 80px;
+            height: 32px;
+            cursor: pointer;
+        }
+
+        .arrow-left {
+            left: 0;
+        }
+
+        .arrow-right {
+            right: 0;
         }
     }
 }

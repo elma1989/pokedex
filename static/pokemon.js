@@ -64,7 +64,7 @@ export class Pokemon {
         document.querySelector('.big-card').classList.add(this.types[0]);
         document.querySelector('.big-card h2').textContent = this.name;
         document.querySelector('.big-card .pkmn-no').textContent = `# ${this.id}`;
-        document.querySelector('.big-card img').src = this.img;
+        document.querySelector('.big-card .pkmn-img').src = this.img;
         refTypes.innerHTML = '';
         this.types.forEach (type => {
             refTypes.innerHTML += Template.typeBtn(type);

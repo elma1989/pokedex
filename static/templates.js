@@ -12,6 +12,23 @@ export class Template {
         `
     }
 
+    static bigCard() {
+        return /*html*/`
+            <header>
+                <h2></h2>
+                <span class="pkmn-no"></span>
+                <div class="pkmn-types"></div>
+                <img src="static/assets/icons/left.svg" class="arrow arrow-left">
+                <img src="static/assets/icons/right.svg" class="arrow arrow-right">
+            </header>
+            <div class="big-card-data">
+                <div class="data-btns"></div>
+                <div class="raw-data"></div>
+            </div>
+            <img class="pkmn-img">
+        `
+    }
+
     static typeBtn(type) {
         return /*html*/`
             <div class="type-icon ${type}">${type}</div>
