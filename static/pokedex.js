@@ -62,11 +62,13 @@ export class Pokedex {
         refBigCard.classList.add(this.currentType);
     }
 
+    /** Diaables scrollbar for overlay. */
     disableScroll() {
         this.scrollY = window.scrollY;
         document.querySelector('main').classList.add('stop-scroll');
     }
 
+    /** Enables scrollbar after leave overlay again */
     enableScroll() {
         document.querySelector('main').classList.remove('stop-scroll');
         window.scrollTo(0, this.scrollY);
@@ -88,6 +90,7 @@ export class Pokedex {
         this.clickArrows();
         this.pokemons[this.currentPkmnIndex].renderBigCard();
         this.pokemons[this.currentPkmnIndex].renderDataBtns();
+        this.pokemons[this.currentPkmnIndex].clickDataBtns();
         this.pokemons[this.currentPkmnIndex].renderAbout();
     }
 

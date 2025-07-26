@@ -27,11 +27,11 @@ export class Pokemon {
         this.id = id;
         this.height = height * 10;
         this.weight = weight / 10;
-        this.hp = hp;
-        this.attack = attack;
-        this.defense = defense;
-        this.spec = spec;
-        this.speed = speed;
+        this.hp = this.relativeValue(hp);
+        this.attack = this.relativeValue(attack);
+        this.defense = this.relativeValue(defense);
+        this.spec = this.relativeValue(spec);
+        this.speed = this.relativeValue(speed);
         this.abilities = abilities;
         this.euroUnits();
         this.stringAbilities();
@@ -44,6 +44,7 @@ export class Pokemon {
         this.kgWeight = new Intl.NumberFormat('de-DE', {style:'unit', unit:'kilogram'}).format(this.weight);
     }
 
+    /** Converts the Abilities to a String */
     stringAbilities() {
         for (let i = 0; i < this.abilities.length; i++) {
             this.textAbilities += this.abilities[i];
@@ -51,6 +52,12 @@ export class Pokemon {
                 this.textAbilities += ', '
             }
         }
+    }
+
+    /** Converts Stats-Values in relative Values */
+    relativeValue(absoluteValue) {
+        const relValue = absoluteValue / 150 * 100;
+        return (relValue < 100) ? relValue : 100;
     }
 
     // #region Render
@@ -83,15 +90,38 @@ export class Pokemon {
         });
     }
 
-    /** Renders the Data-Selection-Buttons */
+    /** Renders the Data-Selection-Buttons. */
     renderDataBtns() {
         const refDataBtns = document.querySelector('.data-btns');
         
         refDataBtns.innerHTML = '';
         refDataBtns.innerHTML += Template.dataBtn(this.types[0], 'About');
+        refDataBtns.innerHTML += Template.dataBtn(this.types[0], 'Stats');
     }
 
+    /**Renders the About-Site. */
     renderAbout() {
         document.querySelector('.raw-data').innerHTML = Template.tableAbount(this);
+    }
+
+    /** Renders the Stats-Site. */
+    renderStats() {
+        document.querySelector('.raw-data').innerHTML = Template.statsProgress(this);
+    }
+    // #endregion
+
+    // #region Event
+
+    /** Manages Click on a Data-Button. */
+    clickDataBtns() {
+        const refDataBtns = document.querySelectorAll('.data-btn');
+        
+        refDataBtns[0].addEventListener('click', () => {
+            this.renderAbout();
+        });
+
+        refDataBtns[1].addEventListener('click', () => {
+            this.renderStats();
+        })
     }
 }

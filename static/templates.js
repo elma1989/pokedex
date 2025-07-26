@@ -59,4 +59,41 @@ export class Template {
             </table>
         `
     }
+
+    static statsProgress(pokemon) {
+        return /*html*/`
+            <div class="pkmn-stats">
+                <div class="stat">
+                    <div class="progress-label">Health:</div>
+                    <div class="progress-bar ${pokemon.types[0]}-stat">
+                        <div class="progress-thumb ${pokemon.types[0]}" style="width:${pokemon.hp}%;"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="progress-label">Attack:</div>
+                    <div class="progress-bar ${pokemon.types[0]}-stat">
+                        <div class="progress-thumb ${pokemon.types[0]}" style="width:${pokemon.attack}%;"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="progress-label">Defense:</div>
+                    <div class="progress-bar ${pokemon.types[0]}-stat">
+                        <div class="progress-thumb ${pokemon.types[0]}" style="width:${pokemon.defense}%;"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="progress-label">Spec:</div>
+                    <div class="progress-bar ${pokemon.types[0]}-stat">
+                        <div class="progress-thumb ${pokemon.types[0]}" style="width:${pokemon.spec}%;"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="progress-label">Speed:</div>
+                    <div class="progress-bar ${pokemon.types[0]}-stat">
+                        <div class="progress-thumb ${pokemon.types[0]}" style="width:${pokemon.speed}%;"></div>
+                    </div>
+                </div>
+            </div>
+        `
+    }
 }
