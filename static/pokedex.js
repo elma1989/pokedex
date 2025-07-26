@@ -9,6 +9,7 @@ export class Pokedex {
     currentLoads = 0;
     currentType = '';
     currentPkmnIndex = 0;
+    scrollY = 0;
 
     // #regin Mathods
     /**
@@ -59,6 +60,16 @@ export class Pokedex {
         refBigCard.classList.remove(this.currentType);
         this.currentType = this.pokemons[this.currentPkmnIndex].types[0];
         refBigCard.classList.add(this.currentType);
+    }
+
+    disableScroll() {
+        this.scrollY = window.scrollY;
+        document.querySelector('main').classList.add('stop-scroll');
+    }
+
+    enableScroll() {
+        document.querySelector('main').classList.remove('stop-scroll');
+        window.scrollTo(0, this.scrollY);
     }
 
     // #region Render
@@ -118,6 +129,7 @@ export class Pokedex {
             card.addEventListener('click', () => {
                 this.currentPkmnIndex = index;
                 this.currentType = this.pokemons[index].types[0];
+                this.disableScroll();
                 this.createBigCard();
             })
         })
@@ -136,6 +148,7 @@ export class Pokedex {
         refOverlay.addEventListener('click', () => {
             document.querySelector('.big-card').classList.remove(this.currentType);
             refOverlay.classList.add('d-none');
+            this.enableScroll();
         });
     }
 

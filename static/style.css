@@ -121,6 +121,11 @@ button {
     text-align: right;
 }
 
+.stop-scroll {
+    height: 83dvh;
+    overflow: hidden;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
