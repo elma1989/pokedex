@@ -66,12 +66,17 @@ export class Pokemon {
      * @param {number} index - Index of the preparated Pokemon-Card.
      */
     renderCard(index) {
-        const refTypes = document.querySelectorAll('.pkmn-card .pkmn-types')[index];
-        document.querySelectorAll('.pkmn-card h2')[index].textContent = this.name;
-        document.querySelectorAll('.pkmn-card img')[index].src = this.img;
-        document.querySelectorAll('.pkmn-card .pkmn-no')[index].textContent = `# ${this.id}`;
-        this.types.forEach(type => {
-            refTypes.innerHTML += Template.typeBtn(type);
+        return new Promise(resolve => {
+            const refTypes = document.querySelectorAll('.pkmn-card .pkmn-types')[index];
+            document.querySelectorAll('.pkmn-card h2')[index].textContent = this.name;
+            document.querySelectorAll('.pkmn-card img')[index].src = this.img;
+            document.querySelectorAll('.pkmn-card .pkmn-no')[index].textContent = `# ${this.id}`;
+            this.types.forEach(type => {
+                refTypes.innerHTML += Template.typeBtn(type);
+            });
+            requestAnimationFrame(() => {
+                resolve();
+            })
         });
     }
 

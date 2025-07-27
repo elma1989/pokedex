@@ -39,7 +39,7 @@ export class Pokedex {
                         pokedata.abilities.map(abi => abi.ability.name)
                     ));
                     this.createPkmnCard(this.pokemons[i-1].types[0]);
-                    this.pokemons[i-1].renderCard(i-1);
+                    await this.pokemons[i-1].renderCard(i-1);
                 }
             } catch (err) {
                 console.error(err);
@@ -142,6 +142,7 @@ export class Pokedex {
         }
     }
 
+    /** Renders all Pokemons, whitch are in the filtered list. */
     renderFilteredCards() {
         const refPkmnArea = document.querySelector('.pkmn-area');
         refPkmnArea.textContent = ''
@@ -151,8 +152,22 @@ export class Pokedex {
                 pokemon.renderCard(index);
             });
         } else {
-            refPkmnArea.textContent = 'No Pokemons found!';
+            refPkmnArea.innerHTML = '<h1>No Pokemons found!</h1>';
         }
+    }
+
+    /** Render alle loaded Pooemone again */
+    async renderAllCards() {
+        this.toggleLoadScreen();
+        document.querySelector('.pkmn-area').textContent = '';
+        
+        for (let i = 0; i < this.pokemons.length; i++) {
+            this.createPkmnCard(this.pokemons[i].types[0]);
+            await this.pokemons[i].renderCard(i);
+        }
+
+        this.clickCards();
+        this.toggleLoadScreen();
     }
     // #endregion
 
@@ -160,6 +175,10 @@ export class Pokedex {
     /** Adds a Click-Event for Load-More-Button */
     clickLoadMore() {
         document.querySelector('#load-more').addEventListener('click', () => {
+            if (document.querySelector('.pkmn-area').innerHTML == '<h1>No Pokemons found!</h1>') {
+                this.renderAllCards();
+                this.clickCards();
+            }
             this.load20Pkmn();
         });
     }
@@ -238,15 +257,19 @@ export class Pokedex {
         });
     }
 
+    /** Manages the Sumbit on Search-Value */
     submitSearch() {
         const refErrMsg = document.querySelector('.errmsg')
         document.forms[0].addEventListener('submit', (e) => {
             e.preventDefault();
 
             if (document.querySelector('.load-screen').classList.contains('d-none')) {
+                refErrMsg.textContent = '';
                 switch(this.checkInput(document.querySelector('#search-input').value)) {
+                    case 0:
+                        this.renderAllCards();
+                        break;
                     case 2:
-                        refErrMsg.textContent = ''
                         this.search();
                         this.renderFilteredCards();
                 }
