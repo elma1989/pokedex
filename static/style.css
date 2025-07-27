@@ -53,13 +53,22 @@ header {
     z-index: 1;
     .content {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         height: 100%;
         padding: 0 32px;
         img {
             padding: 16px 0;
             height: 100%;
+            margin-right: 64px;
+        }
+    }
+    @media (max-width: 850px) {
+        .content {
+            flex-direction: column;
+            img{
+                height: 60%;
+                margin: 0;
+            }
         }
     }
 }
@@ -72,7 +81,7 @@ main {
     height: auto;
     min-height: 80dvh;
     .content {
-        padding: 16px 32px;
+        padding: 32px;
         .pkmn-area {
             display: flex;
             width: 100%;
@@ -132,6 +141,28 @@ form {
         height: 20px;
     }
 }
+@media(max-width: 600px) {
+    header {
+        height: 25dvh;
+    }
+    form {
+        display: felx;
+        flex-direction: column;
+        label {
+            display: flex;
+            margin-bottom: 4px;
+        }
+        input[type=text] {
+            width: 300px;
+        }
+
+        @media(max-width: 350px) {
+            input[type=text] {
+                width: 250px;
+            }
+        }
+    }
+}
 
 .load-screen {
     display: flex;
@@ -139,11 +170,13 @@ form {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100dvh;
+    height: 85dvh;
     position: fixed;
-    top: 0;
+    top: 15dvh;
     left: 0;
     img {
+        width: auto;
+        max-width: 100%;
         animation: spin 1s linear infinite;
     }
 }

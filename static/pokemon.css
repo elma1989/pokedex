@@ -258,11 +258,12 @@
     justify-content: center;
     align-items: center;
     position: fixed;
-    top: 0;
+    top: 15dvh;
     left: 0;
     .big-card {
-        width: 300px;
+        width: 280px;
         height: 80%;
+        position:absolute;
         top: 32px;
         border-radius: 16px;
         padding: 16px;
@@ -315,6 +316,16 @@
 
         .arrow-right {
             right: 0;
+        }
+    }
+}
+
+@media (max-width: 600px)  {
+    .big-card-overlay {
+        top: 25dvh;
+        .big-card {
+            top: 0;
+            height: 75dvh;
         }
     }
 }
