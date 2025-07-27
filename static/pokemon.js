@@ -111,7 +111,6 @@ export class Pokemon {
     // #endregion
 
     // #region Event
-
     /** Manages Click on a Data-Button. */
     clickDataBtns() {
         const refDataBtns = document.querySelectorAll('.data-btn');

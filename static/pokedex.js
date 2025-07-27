@@ -74,6 +74,17 @@ export class Pokedex {
         window.scrollTo(0, this.scrollY);
     }
 
+    /**
+     * Checks the length of search input value
+     * @param {string} input - Input of search value
+     * @returns 0 = empty, 1 = to short, 2 = correct
+     */
+    checkInput(input) {
+        if (input.length == 0) return 0;
+        if (input.length < 3) return 1;
+        return 2;
+    }
+
     // #region Render
     /**
      * Creates a Pokemon-Card.
@@ -174,6 +185,26 @@ export class Pokedex {
                 this.createBigCard();
             });
         }
+    }
+
+    /** Gives an Errormessage, if the length input of  search-field is not correct. */
+    changeSearch() {
+        const refSearchInput = document.querySelector('input[type=text]');
+        const refErrMsg = document.querySelector('.errmsg');
+
+        refSearchInput.addEventListener('keyup', () => {
+            switch(this.checkInput(refSearchInput.value)) {
+                case 0:
+                    refErrMsg.textContent = '';
+                    break;
+                case 1:
+                    refErrMsg.textContent = 'Type 3 Letters!';
+                    break;
+                case 2:
+                    refErrMsg.textContent = '';
+                    break;
+            }
+        })
     }
 }
 

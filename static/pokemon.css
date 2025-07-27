@@ -290,6 +290,9 @@
                     background: transparent;
                 }
             }
+            .raw-data {
+                padding-top: 24px;
+            }
         }
         .pkmn-img {
             width: 200px;
