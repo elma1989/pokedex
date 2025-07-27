@@ -6,3 +6,4 @@ pokedex.clickLoadMore();
 pokedex.clickBigCard();
 pokedex.clickBigCardOverlay();
 pokedex.changeSearch();
+pokedex.submitSearch();

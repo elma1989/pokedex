@@ -6,12 +6,14 @@ import { Template } from './templates.js'
  */
 export class Pokedex {
     pokemons = [];
+    filteredPokemons = [];
     currentLoads = 0;
     currentType = '';
     currentPkmnIndex = 0;
     scrollY = 0;
 
     // #regin Mathods
+    // #region Primary
     /**
      * loads next 20 Pokemons.
      */
@@ -36,7 +38,7 @@ export class Pokedex {
                         pokedata.stats[5]['base_stat'],
                         pokedata.abilities.map(abi => abi.ability.name)
                     ));
-                    this.createPkmnCard(this.pokemons[i-1].types[0], i-1);
+                    this.createPkmnCard(this.pokemons[i-1].types[0]);
                     this.pokemons[i-1].renderCard(i-1);
                 }
             } catch (err) {
@@ -85,13 +87,29 @@ export class Pokedex {
         return 2;
     }
 
+    /**
+     * Checks, if Seach Input includes Pokemon-Name.
+     * @param {Pokemon} pokemon Object of one Pokemon.
+     * @returns true - if has matched.
+     */
+    checkName(pokemon) {
+        return pokemon.name.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
+    }
+
+    /** Felters the Pokeones to User-Input. */
+    search() {
+        this.filteredPokemons = this.pokemons.filter(this.checkName);
+        document.querySelector('#search-input').value = '';
+    }
+    // #endregion
+
     // #region Render
     /**
      * Creates a Pokemon-Card.
      * @param {string} type - Type of Pokemon
      */
-    createPkmnCard(type, index) {
-        document.querySelector('.pkmn-area').innerHTML += Template.pkmnCart(type, index);
+    createPkmnCard(type) {
+        document.querySelector('.pkmn-area').innerHTML += Template.pkmnCart(type);
     }
 
     /** Sequency for rendering a big card. */
@@ -121,6 +139,19 @@ export class Pokedex {
             refArrows[1].classList.remove('d-none');
         } else {
             refArrows[1].classList.add('d-none');
+        }
+    }
+
+    renderFilteredCards() {
+        const refPkmnArea = document.querySelector('.pkmn-area');
+        refPkmnArea.textContent = ''
+        if (this.filteredPokemons.length > 0) {
+            this.filteredPokemons.forEach((pokemon, index) => {
+                this.createPkmnCard(pokemon.types[0]);
+                pokemon.renderCard(index);
+            });
+        } else {
+            refPkmnArea.textContent = 'No Pokemons found!';
         }
     }
     // #endregion
@@ -189,7 +220,7 @@ export class Pokedex {
 
     /** Gives an Errormessage, if the length input of  search-field is not correct. */
     changeSearch() {
-        const refSearchInput = document.querySelector('input[type=text]');
+        const refSearchInput = document.querySelector('#search-input');
         const refErrMsg = document.querySelector('.errmsg');
 
         refSearchInput.addEventListener('keyup', () => {
@@ -204,7 +235,26 @@ export class Pokedex {
                     refErrMsg.textContent = '';
                     break;
             }
-        })
+        });
+    }
+
+    submitSearch() {
+        const refErrMsg = document.querySelector('.errmsg')
+        document.forms[0].addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            if (document.querySelector('.load-screen').classList.contains('d-none')) {
+                switch(this.checkInput(document.querySelector('#search-input').value)) {
+                    case 2:
+                        refErrMsg.textContent = ''
+                        this.search();
+                        this.renderFilteredCards();
+                }
+
+            } else {
+                refErrMsg.textContent = "Don't search during loading."
+            }
+        });
     }
 }
 

@@ -61,7 +61,6 @@ export class Pokemon {
     }
 
     // #region Render
-
     /**
      * Renders a Card of the Pokemon.
      * @param {number} index - Index of the preparated Pokemon-Card.
