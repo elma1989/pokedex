@@ -33,7 +33,7 @@ export class Pokemon {
         this.spec = this.relativeValue(spec);
         this.speed = this.relativeValue(speed);
         this.abilities = abilities;
-        this.moves = moves.sort((a,b) => a.level - b.level);
+        this.moves = moves.filter(move => move.level > 0).sort((a,b) => a.level - b.level);
         this.euroUnits();
         this.stringAbilities();
     }
@@ -102,6 +102,7 @@ export class Pokemon {
         refDataBtns.innerHTML = '';
         refDataBtns.innerHTML += Template.dataBtn(this.types[0], 'About');
         refDataBtns.innerHTML += Template.dataBtn(this.types[0], 'Stats');
+        refDataBtns.innerHTML += Template.dataBtn(this.types[0], 'Moves');
     }
 
     /**Renders the About-Site. */
@@ -112,6 +113,24 @@ export class Pokemon {
     /** Renders the Stats-Site. */
     renderStats() {
         document.querySelector('.raw-data').innerHTML = Template.statsProgress(this);
+    }
+
+    renderMoves() {
+        document.querySelector('.raw-data').innerHTML = Template.moveTable();
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = Template.moveTableHead();
+        document.querySelector('#moves').appendChild(tr);
+
+        this.moves.forEach(move => {
+            this.renderSingleMove(move);
+        })
+    }
+
+    renderSingleMove(move) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = Template.singleMove(move);
+        document.querySelector('#moves').appendChild(tr);
     }
     // #endregion
 
@@ -126,7 +145,11 @@ export class Pokemon {
 
         refDataBtns[1].addEventListener('click', () => {
             this.renderStats();
-        })
+        });
+
+        refDataBtns[2].addEventListener('click', () => {
+            this.renderMoves();
+        });
     }
 }
 

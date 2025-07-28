@@ -54,7 +54,6 @@ export class Pokedex {
         this.toggleLoadScreen();
         this.currentLoads += 19;
         this.clickCards();
-        console.log(this.pokemons[0]);
     }
 
     /** Turns Load-Screen on and off. */

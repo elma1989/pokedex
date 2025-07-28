@@ -96,4 +96,24 @@ export class Template {
             </div>
         `
     }
+
+    static moveTable() {
+        return /*html*/`
+            <table id="moves"></table>
+        `
+    }
+
+    static moveTableHead() {
+        return /*html*/`
+            <th>Level</th>
+            <th>Move</th>
+        `
+    }
+
+    static singleMove(move) {
+        return /*html*/`
+            <td class="level ta-right">${move.level}</td>
+            <td class="move-name">${move.name}</td>
+        `
+    }
 }
