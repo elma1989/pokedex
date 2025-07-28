@@ -8,7 +8,7 @@ export class Pokedex {
     pokemons = [];
     filteredPokemons = [];
     currentLoads = 0;
-    currentType = '';
+    currentType = 'normal';
     currentPkmnIndex = 0;
     scrollY = 0;
 
@@ -66,7 +66,7 @@ export class Pokedex {
     switchCurrentType() {
         const refBigCard = document.querySelector('.big-card');
         refBigCard.classList.remove(this.currentType);
-        this.currentType = this.pokemons[this.currentPkmnIndex].types[0];
+        this.currentType = (this.filteredPokemons.length > 0) ? this.filteredPokemons[this.currentPkmnIndex].types[0] : this.pokemons[this.currentPkmnIndex].types[0];
         refBigCard.classList.add(this.currentType);
     }
 
@@ -80,6 +80,30 @@ export class Pokedex {
     enableScroll() {
         document.body.classList.remove('stop-scroll');
         window.scrollTo(0, this.scrollY);
+    }
+
+    /** Disables the Load-More-Button. */
+    disabeleLoadMore() {
+        document.querySelector('#load-more').classList.add('d-none');
+    }
+
+    /** Enables the Load-More-Button. */
+    enableLoadMore() {
+        document.querySelector('#load-more').classList.remove('d-none');
+    }
+
+    /** Enables Big-Card-Overlay. */
+    enableBigCard() {
+        document.querySelector('.big-card-overlay').classList.remove('d-none');
+        this.disableScroll();
+        this.createBigCard();
+    }
+
+    /** Disables Big-Card-Overlay. */
+    disableBigCard() {
+        document.querySelector('.big-card-overlay').classList.add('d-none');
+        document.querySelector('.big-card').classList.remove(this.currentType);
+        this.enableScroll();
     }
 
     /**
@@ -123,10 +147,11 @@ export class Pokedex {
         document.querySelector('.big-card').innerHTML = Template.bigCard();
         this.renderCardArrows();
         this.clickArrows();
-        this.pokemons[this.currentPkmnIndex].renderBigCard();
-        this.pokemons[this.currentPkmnIndex].renderDataBtns();
-        this.pokemons[this.currentPkmnIndex].clickDataBtns();
-        this.pokemons[this.currentPkmnIndex].renderAbout();
+        const currentList = (this.filteredPokemons.length > 0) ? this.filteredPokemons : this.pokemons;
+        currentList[this.currentPkmnIndex].renderBigCard();
+        currentList[this.currentPkmnIndex].renderDataBtns();
+        currentList[this.currentPkmnIndex].clickDataBtns();
+        currentList[this.currentPkmnIndex].renderAbout();
     }
 
     /**
@@ -134,6 +159,7 @@ export class Pokedex {
      */
     renderCardArrows() {
         const refArrows = document.querySelectorAll('.arrow');
+        const currentList = (this.filteredPokemons.length > 0) ? this.filteredPokemons : this.pokemons;
 
         if (this.currentPkmnIndex > 0) {
             refArrows[0].classList.remove('d-none');
@@ -141,7 +167,7 @@ export class Pokedex {
             refArrows[0].classList.add('d-none');
         }
 
-        if (this.currentPkmnIndex < this.pokemons.length - 1) {
+        if (this.currentPkmnIndex < currentList.length - 1) {
             refArrows[1].classList.remove('d-none');
         } else {
             refArrows[1].classList.add('d-none');
@@ -157,6 +183,7 @@ export class Pokedex {
                 this.createPkmnCard(pokemon.types[0]);
                 pokemon.renderCard(index);
             });
+            this.clickCards();
         } else {
             refPkmnArea.innerHTML = '<h1>No Pokemons found!</h1>';
         }
@@ -198,9 +225,8 @@ export class Pokedex {
         refCards.forEach((card, index) => {
             card.addEventListener('click', () => {
                 this.currentPkmnIndex = index;
-                this.currentType = this.pokemons[index].types[0];
-                this.disableScroll();
-                this.createBigCard();
+                this.currentType = (this.filteredPokemons.length > 0) ? this.filteredPokemons[index].types[0] : this.pokemons[index].types[0];  
+                this.enableBigCard();
             })
         })
     }
@@ -214,11 +240,8 @@ export class Pokedex {
 
     /** Manages a click out of big card. */
     clickBigCardOverlay() {
-        const refOverlay = document.querySelector('.big-card-overlay');
-        refOverlay.addEventListener('click', () => {
-            document.querySelector('.big-card').classList.remove(this.currentType);
-            refOverlay.classList.add('d-none');
-            this.enableScroll();
+        document.querySelector('.big-card-overlay').addEventListener('click', () => {
+            this.disableBigCard();    
         });
     }
 
@@ -268,16 +291,20 @@ export class Pokedex {
         const refErrMsg = document.querySelector('.errmsg')
         document.forms[0].addEventListener('submit', (e) => {
             e.preventDefault();
+            this.disableBigCard();
 
             if (document.querySelector('.load-screen').classList.contains('d-none')) {
                 refErrMsg.textContent = '';
                 switch(this.checkInput(document.querySelector('#search-input').value)) {
                     case 0:
+                        this.filteredPokemons = [];
                         this.renderAllCards();
+                        this.enableLoadMore();
                         break;
                     case 2:
                         this.search();
                         this.renderFilteredCards();
+                        this.disabeleLoadMore();
                 }
 
             } else {

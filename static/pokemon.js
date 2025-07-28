@@ -125,9 +125,8 @@ export class Pokemon {
 
         this.moves.forEach(move => {
             this.renderSingleMove(move);
-        })
+        });
     }
-
 
     /**
      * Renders one sinle move.
