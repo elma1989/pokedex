@@ -48,7 +48,7 @@ export class Pokemon {
     /** Converts the Abilities to a String */
     stringAbilities() {
         for (let i = 0; i < this.abilities.length; i++) {
-            this.textAbilities += this.abilities[i];
+            this.textAbilities += this.abilities[i].name;
             if (i < this.abilities.length - 1) {
                 this.textAbilities += ', '
             }
@@ -115,6 +115,7 @@ export class Pokemon {
         document.querySelector('.raw-data').innerHTML = Template.statsProgress(this);
     }
 
+    /** Reders the Moves-Site. */
     renderMoves() {
         document.querySelector('.raw-data').innerHTML = Template.moveTable();
 
@@ -127,6 +128,11 @@ export class Pokemon {
         })
     }
 
+
+    /**
+     * Renders one sinle move.
+     * @param {Move} move - Move to render.
+     */
     renderSingleMove(move) {
         const tr = document.createElement('tr');
         tr.innerHTML = Template.singleMove(move);
@@ -153,10 +159,29 @@ export class Pokemon {
     }
 }
 
+/** Represents a move of a Pokemon. */
 export class Move {
-    constructor (name,type, level) {
-        this.name = name;
+    /**
+     * Creates a move.
+     * @param {string} name - Name of move.
+     * @param {string} type - Method, on which the Pokemon gets this move.
+     * @param {number} level - Level of a Pokemone, who learns that move, if move has type level-up.
+     */
+    constructor (name, type='Level-Up', level=1) {
+        this.name = this.convertUpperCase(name);
         this.type = type;
         this.level = level
+    }
+
+    /**
+     * Converts as Lower-Case-Dash-String to an Upper-Case-Dash-String.
+     * @param {string} string - String to convert.
+     * @returns Upper-Case-String
+     */
+    convertUpperCase(string) {
+        const words = string.split('-');
+        if(words.length == 1) return string.charAt(0).toUpperCase() + string.slice(1);
+        const result = words.map (word => word.charAt(0).toUpperCase() + word.slice(1));
+        return result.join('-');
     }
 }

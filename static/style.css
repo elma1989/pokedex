@@ -191,8 +191,7 @@ form {
 }
 
 .stop-scroll {
-    height: 80dvh;
-    overflow: hidden;
+    overflow-y: hidden;
 }
 
 @keyframes spin {

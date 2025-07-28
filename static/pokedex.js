@@ -37,7 +37,7 @@ export class Pokedex {
                         pokedata.stats[2]['base_stat'],
                         pokedata.stats[3]['base_stat'],
                         pokedata.stats[5]['base_stat'],
-                        pokedata.abilities.map(abi => abi.ability.name),
+                        pokedata.abilities.map(abi => new Move(abi.ability.name)),
                         pokedata.moves.map(m => new Move(
                             m.move.name,
                             m['version_group_details'][0]['move_learn_method'].name,
@@ -73,12 +73,12 @@ export class Pokedex {
     /** Diaables scrollbar for overlay. */
     disableScroll() {
         this.scrollY = window.scrollY;
-        document.querySelector('main').classList.add('stop-scroll');
+        document.body.classList.add('stop-scroll');
     }
 
     /** Enables scrollbar after leave overlay again */
     enableScroll() {
-        document.querySelector('main').classList.remove('stop-scroll');
+        document.body.classList.remove('stop-scroll');
         window.scrollTo(0, this.scrollY);
     }
 
@@ -263,7 +263,7 @@ export class Pokedex {
         });
     }
 
-    /** Manages the Sumbit on Search-Value */
+    /** Manages the Sumbit on Search-Value. */
     submitSearch() {
         const refErrMsg = document.querySelector('.errmsg')
         document.forms[0].addEventListener('submit', (e) => {
