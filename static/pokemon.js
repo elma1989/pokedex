@@ -20,7 +20,7 @@ export class Pokemon {
      * @param {number} spec - Basic value of special-attacks for that Pokemon (Attack-Value only)
      * @param {number} speed - Basic-Speed value of that Pokemon
      */
-    constructor (name, types, img, id, height, weight, hp, attack, defense, spec, speed, abilities) {
+    constructor (name, types, img, id, height, weight, hp, attack, defense, spec, speed, abilities, moves) {
         this.name = name.charAt(0).toUpperCase() + name.slice(1);
         this.types = types;
         this.img = img;
@@ -33,6 +33,7 @@ export class Pokemon {
         this.spec = this.relativeValue(spec);
         this.speed = this.relativeValue(speed);
         this.abilities = abilities;
+        this.moves = moves.sort((a,b) => a.level - b.level);
         this.euroUnits();
         this.stringAbilities();
     }
@@ -126,5 +127,13 @@ export class Pokemon {
         refDataBtns[1].addEventListener('click', () => {
             this.renderStats();
         })
+    }
+}
+
+export class Move {
+    constructor (name,type, level) {
+        this.name = name;
+        this.type = type;
+        this.level = level
     }
 }

@@ -1,4 +1,4 @@
-import { Pokemon } from './pokemon.js';
+import { Pokemon, Move } from './pokemon.js';
 import { Template } from './templates.js'
 
 /**
@@ -25,6 +25,7 @@ export class Pokedex {
                 const response = await fetch (`https://pokeapi.co/api/v2/pokemon/${i}`);
                 if (response.ok) {
                     const pokedata = await response.json();
+                
                     this.pokemons.push(new Pokemon(
                         pokedata.name,
                         pokedata.types.map(t => t.type.name),
@@ -36,7 +37,12 @@ export class Pokedex {
                         pokedata.stats[2]['base_stat'],
                         pokedata.stats[3]['base_stat'],
                         pokedata.stats[5]['base_stat'],
-                        pokedata.abilities.map(abi => abi.ability.name)
+                        pokedata.abilities.map(abi => abi.ability.name),
+                        pokedata.moves.map(m => new Move(
+                            m.move.name,
+                            m['version_group_details'][0]['move_learn_method'].name,
+                            m['version_group_details'][0]['level_learned_at']
+                        ))
                     ));
                     this.createPkmnCard(this.pokemons[i-1].types[0]);
                     await this.pokemons[i-1].renderCard(i-1);
@@ -48,6 +54,7 @@ export class Pokedex {
         this.toggleLoadScreen();
         this.currentLoads += 19;
         this.clickCards();
+        console.log(this.pokemons[0]);
     }
 
     /** Turns Load-Screen on and off. */
