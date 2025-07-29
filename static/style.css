@@ -192,6 +192,7 @@ form {
 
 .stop-scroll {
     overflow-y: hidden;
+    padding-right: 15px;
 }
 
 @keyframes spin {
