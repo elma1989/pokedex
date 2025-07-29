@@ -113,6 +113,10 @@
     right: 0;
 }
 
+.big-card .pkmn-no {
+    right: 32px;
+}
+
 .raw-data {
     padding-top: 16px;
     table {

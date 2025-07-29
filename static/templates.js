@@ -17,6 +17,7 @@ export class Template {
             <header>
                 <h2></h2>
                 <span class="pkmn-no"></span>
+                <button id="close-btn">x</button>
                 <div class="pkmn-types"></div>
                 <img src="static/assets/icons/left.svg" class="arrow arrow-left">
                 <img src="static/assets/icons/right.svg" class="arrow arrow-right">

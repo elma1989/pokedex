@@ -145,6 +145,7 @@ export class Pokedex {
     /** Sequency for rendering a big card. */
     createBigCard() {
         document.querySelector('.big-card').innerHTML = Template.bigCard();
+        this.clickClose();
         this.renderCardArrows();
         this.clickArrows();
         const currentList = (this.filteredPokemons.length > 0) ? this.filteredPokemons : this.pokemons;
@@ -264,6 +265,12 @@ export class Pokedex {
                 this.createBigCard();
             });
         }
+    }
+
+    clickClose() {
+        document.querySelector('#close-btn').addEventListener('click', () => {
+            this.disableBigCard();
+        });
     }
 
     /** Gives an Errormessage, if the length input of  search-field is not correct. */
