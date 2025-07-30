@@ -74,12 +74,16 @@ export class Pokedex {
     disableScroll() {
         this.scrollY = window.scrollY;
         document.body.classList.add('stop-scroll');
+        if (this.hasBodyOverflow()) {
+            document.body.classList.add('pdr');
+        }
     }
 
     /** Enables scrollbar after leave overlay again */
     enableScroll() {
         document.body.classList.remove('stop-scroll');
         window.scrollTo(0, this.scrollY);
+        document.body.classList.remove('pdr');
     }
 
     /** Disables the Load-More-Button. */
@@ -124,6 +128,11 @@ export class Pokedex {
      */
     checkName(pokemon) {
         return pokemon.name.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
+    }
+
+    hasBodyOverflow() {
+        const isOverflowing = document.body.scrollHeight > window.innerHeight;
+        return isOverflowing;
     }
 
     /** Felters the Pokeones to User-Input. */

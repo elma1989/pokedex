@@ -192,6 +192,8 @@ form {
 
 .stop-scroll {
     overflow-y: hidden;
+}
+.pdr {
     padding-right: 15px;
 }
 
